@@ -25,14 +25,17 @@ fun IncompletedItem(task:Task){
         .fillMaxWidth()
         .padding(top = 16.dp)
     ) {
-        Card(modifier = Modifier
-            .height(24.dp)
-            .width(24.dp),
-            shape = RoundedCornerShape(6.dp),
-            backgroundColor = CheckBoxColor,
-            border = BorderStroke(2.dp, BorderColorChecker)
-        ){
+        Box(Modifier.padding(top = 6.dp)) {
+            Card(modifier = Modifier
+                .height(24.dp)
+                .width(24.dp),
+                shape = RoundedCornerShape(6.dp),
+                backgroundColor = CheckBoxColor,
+                border = BorderStroke(2.dp, BorderColorChecker)
+            ){
+            }
         }
+
         Column(modifier = Modifier
             .padding(start = 16.dp)
         ) {
