@@ -1,6 +1,8 @@
 package com.example.simpletodocompose
 
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
@@ -11,6 +13,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.InternalComposeApi
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -21,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simpletodocompose.componets.CompletedItem
+import com.example.simpletodocompose.componets.Form
 import com.example.simpletodocompose.componets.HeaderComponent
 import com.example.simpletodocompose.componets.IncompletedItem
 import com.example.simpletodocompose.model.Task
@@ -50,6 +55,11 @@ class MainActivity : ComponentActivity() {
                     color = MainBackgroundColor,
 
                 ) {
+
+                    val showFromState = remember {
+                        mutableStateOf(false)
+                    }
+
                     Box(modifier = Modifier.fillMaxSize()){
 
                         Column(
@@ -90,6 +100,10 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
+
+
+
+
                         Column(
                             Modifier
                                 .fillMaxSize()
@@ -98,8 +112,10 @@ class MainActivity : ComponentActivity() {
                             verticalArrangement = Arrangement.Bottom,
                             horizontalAlignment = Alignment.End
                         ) {
-                            FloatingActionButton(onClick = {},
-                                modifier = Modifier.height(56.dp).width(56.dp),
+                            FloatingActionButton(onClick = {showFromState.value = true},
+                                modifier = Modifier
+                                    .height(56.dp)
+                                    .width(56.dp),
                                 backgroundColor = FloatingColor,
 
                                 ) {
@@ -113,11 +129,40 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                            ,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Divider(Modifier
+                                .height(2.dp)
+                                .background(BorderColorChecker)
+                                .fillMaxWidth()
+                            )
+
+
+                            if(showFromState.value){
+                                Form(showFromState)
+                            }
+
+                            Divider(Modifier
+                                .height(2.dp)
+                                .background(BorderColorChecker)
+                                .fillMaxWidth()
+                            )
+                        }
+
+
                     }
                 }
             }
         }
     }
+
+
+
+
 
     @Composable
     fun Subtitle(text:String){
