@@ -1,4 +1,4 @@
-package com.example.simpletodocompose.componets
+package com.example.simpletodocompose.view.componets
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -18,7 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simpletodocompose.R
 import com.example.simpletodocompose.model.Task
-import com.example.simpletodocompose.ui.theme.*
+
+import com.example.simpletodocompose.view.theme.BorderColorChecker
+import com.example.simpletodocompose.view.theme.CheckBoxColor
+import com.example.simpletodocompose.view.theme.SubTitleColor
+import com.example.simpletodocompose.view.theme.inrel
 
 
 @Composable

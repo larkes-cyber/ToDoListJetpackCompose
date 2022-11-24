@@ -1,4 +1,4 @@
-package com.example.simpletodocompose.componets
+package com.example.simpletodocompose.view.componets
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -16,7 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simpletodocompose.model.Task
-import com.example.simpletodocompose.ui.theme.*
+
+import com.example.simpletodocompose.view.theme.*
 
 
 @Composable
