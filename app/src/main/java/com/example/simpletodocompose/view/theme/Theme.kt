@@ -1,4 +1,4 @@
-package com.example.simpletodocompose.ui.theme
+package com.example.simpletodocompose.view.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
