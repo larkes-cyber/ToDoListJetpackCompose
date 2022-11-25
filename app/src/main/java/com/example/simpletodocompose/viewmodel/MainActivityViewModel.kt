@@ -32,5 +32,10 @@ class MainActivityViewModel(
         }
     }
 
+    suspend fun toCompletedTask(task:Task){
+        task.status = true
+        tasksDao.updateTask(task)
+    }
+
 
 }

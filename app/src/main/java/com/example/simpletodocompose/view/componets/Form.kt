@@ -12,10 +12,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.simpletodocompose.model.Task
 import com.example.simpletodocompose.view.theme.*
+import kotlin.reflect.KFunction1
 
 @Composable
-fun Form(state: MutableState<Boolean>) {
+fun Form(
+    state: MutableState<Boolean>,
+    closeState:MutableState<Boolean>,
+    date:String,
+    toAdd: KFunction1<Task, Unit>,
+    toUploadTasks:KFunction1<String,Unit>,
+
+) {
 
     val textTaskState = remember {
         mutableStateOf("")
@@ -111,6 +120,8 @@ fun Form(state: MutableState<Boolean>) {
 
                 IconButton(
                     onClick = {
+                        toAdd(Task(title = textTaskState.value, icon = textIconState.value, subtitle = textClassState.value, date = "12.02.2002", status = false))
+                        toUploadTasks(date)
                         state.value = false
                     },
                     modifier = Modifier.fillMaxWidth(1f)

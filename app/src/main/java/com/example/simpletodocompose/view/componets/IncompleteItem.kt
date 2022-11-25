@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,8 +21,12 @@ import com.example.simpletodocompose.model.Task
 import com.example.simpletodocompose.view.theme.*
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun IncompletedItem(task:Task){
+fun IncompletedItem(
+    task:Task,
+    toCompletedTask:(task:Task) -> Unit
+){
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(top = 16.dp)
@@ -32,7 +37,8 @@ fun IncompletedItem(task:Task){
                 .width(24.dp),
                 shape = RoundedCornerShape(6.dp),
                 backgroundColor = CheckBoxColor,
-                border = BorderStroke(2.dp, BorderColorChecker)
+                border = BorderStroke(2.dp, BorderColorChecker),
+                onClick = {toCompletedTask(task)}
             ){
             }
         }

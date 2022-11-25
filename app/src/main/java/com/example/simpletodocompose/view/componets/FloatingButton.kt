@@ -13,7 +13,13 @@ import com.example.simpletodocompose.R
 import com.example.simpletodocompose.view.theme.FloatingColor
 
 @Composable
-fun FloatingButton(state:MutableState<Boolean>) {
+fun FloatingButton(state:MutableState<Boolean>,closeState:MutableState<Boolean>) {
+
+    fun stateActions(){
+        state.value = true
+        closeState.value = false
+    }
+
     Column(
         Modifier
             .fillMaxSize()
@@ -22,7 +28,7 @@ fun FloatingButton(state:MutableState<Boolean>) {
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.End
     ) {
-        FloatingActionButton(onClick = {state.value = true},
+        FloatingActionButton(onClick = { stateActions()},
             modifier = Modifier
                 .height(56.dp)
                 .width(56.dp),

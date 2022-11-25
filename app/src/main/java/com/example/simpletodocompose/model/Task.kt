@@ -6,7 +6,9 @@ class Task(
     val title:String,
     val icon:String,
     val subtitle:String,
-    val date:String
+    val date:String,
+    var status:Boolean,
+    val id:Int? = null
 )
 
 fun Task.toEntityTask():EntityTask{
@@ -14,7 +16,9 @@ fun Task.toEntityTask():EntityTask{
         title = title,
         icon = icon,
         subtitle = subtitle,
-        date = date
+        date = date,
+        status = status,
+        id = id
 
     )
 }
@@ -24,6 +28,8 @@ fun EntityTask.toTask():Task{
         title = title,
         icon = icon,
         subtitle = subtitle,
-        date = date
+        date = date,
+        status = status,
+        id = id
     )
 }
