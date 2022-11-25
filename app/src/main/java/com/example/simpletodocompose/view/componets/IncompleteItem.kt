@@ -19,13 +19,14 @@ import androidx.compose.ui.unit.sp
 import com.example.simpletodocompose.model.Task
 
 import com.example.simpletodocompose.view.theme.*
+import kotlin.reflect.KFunction1
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun IncompletedItem(
     task:Task,
-    toCompletedTask:(task:Task) -> Unit
+    toCompletedTask: KFunction1<Task, Unit>
 ){
     Row(modifier = Modifier
         .fillMaxWidth()

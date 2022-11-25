@@ -17,6 +17,6 @@ interface TasksDao {
     suspend fun getTasks(day:String):List<EntityTask>
 
     @Update
-    suspend fun updateTask(task: Task)
+    suspend fun updateTask(entityTask: EntityTask)
 
 }

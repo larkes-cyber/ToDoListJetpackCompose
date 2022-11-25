@@ -49,6 +49,11 @@ class MainActivity : ComponentActivity(), CoroutineScope {
             viewModel.getTasks(date)
         }
     }
+    private fun toUpdateTask(task:Task){
+        launch {
+            viewModel.toCompletedTask(task)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +62,7 @@ class MainActivity : ComponentActivity(), CoroutineScope {
         viewModel = MainActivityViewModel(applicationContext)
         val activityState = viewModel.state
 
-        toUploadTasks("12.02.2002")
+        toUploadTasks(viewModel.getNowDate())
 
         setContent {
             SimpleToDoComposeTheme {
@@ -76,7 +81,6 @@ class MainActivity : ComponentActivity(), CoroutineScope {
                     }
 
 
-
                     Box(modifier = Modifier.fillMaxSize()){
 
                         Column(
@@ -86,22 +90,46 @@ class MainActivity : ComponentActivity(), CoroutineScope {
                                 .fillMaxHeight()
 
                         ) {
-                            //header: date and count of tasks
-                            HeaderComponent(date = "12.02.2002", countOfCompleted = 5, countOfIncompleted = 5)
 
+                            //main part(depends from data)
                             if(!activityState.value.isLoading && activityState.value.error.isEmpty()){
+
+                                //tasks:completed, incompleted
+                                val completedTasks = activityState.value.tasks!!.filter { it.status }
+                                val incompletedTasks = activityState.value.tasks!!.filter { !it.status }
+
+                                //header: date and count of tasks
+                                HeaderComponent(date = viewModel.getNowDate(), countOfCompleted = completedTasks.size, countOfIncompleted = incompletedTasks.size)
+
                                 //list of incompleted tasks
-                                TasksListComponent(title = "Incompleted", list = activityState.value.tasks!!.filter { !it.status })
+                                TasksListComponent(title = "Incompleted", list = incompletedTasks, toComplete = ::toUpdateTask)
                                 //list of completed tasks
-                                TasksListComponent(title = "Completed", list = activityState.value.tasks!!.filter { it.status })
+                                TasksListComponent(title = "Completed", list = completedTasks, toComplete = ::toUpdateTask)
                             }
+
                         }
+
+                        //progress bar during data loading
+                        if(activityState.value.isLoading){
+                            Column(
+                                modifier = Modifier.fillMaxWidth().padding(top = 50.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                CircularProgressIndicator(Modifier
+                                    .height(70.dp)
+                                    .width(70.dp))
+                            }
+
+                        }
+
+
                         //button to add task
                         FloatingButton(state = showFromState, closeState = closeFormState)
-                        //form to bundle task
+                        //form to add task
                         if(showFromState.value){
-                            Form(showFromState, toAdd = ::toAddTask, closeState = closeFormState, date = "12.02.2002", toUploadTasks = ::toUploadTasks)
+                            Form(showFromState, toAdd = ::toAddTask, closeState = closeFormState, date = viewModel.getNowDate(), toUploadTasks = ::toUploadTasks)
                         }
+
                     }
                 }
             }

@@ -120,9 +120,8 @@ fun Form(
 
                 IconButton(
                     onClick = {
-                        toAdd(Task(title = textTaskState.value, icon = textIconState.value, subtitle = textClassState.value, date = "12.02.2002", status = false))
-                        toUploadTasks(date)
                         state.value = false
+                        toAdd(Task(title = textTaskState.value, icon = textIconState.value, subtitle = textClassState.value, date = date, status = false))
                     },
                     modifier = Modifier.fillMaxWidth(1f)
                 ) {

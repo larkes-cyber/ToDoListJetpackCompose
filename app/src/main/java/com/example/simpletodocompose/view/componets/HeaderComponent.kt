@@ -41,7 +41,7 @@ fun HeaderComponent(
                 fontStyle = FontStyle.Normal
             )
             Text(
-                text = "$countOfCompleted incomplete, $countOfIncompleted completed",
+                text = "$countOfIncompleted incomplete, $countOfCompleted completed",
                 color = SubTitleColor,
                 style = TextStyle(
                     fontSize = 14.sp
